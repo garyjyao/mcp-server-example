@@ -14,8 +14,6 @@ exec-shell:
 	docker exec -it `docker ps | grep $(IMAGE_NAME) | awk '{print $$1}'` /bin/bash
 all: check image
 up: all run
-run-smoke-tests:
-	 @./smoke-tests.py
 check:
 	 @pytest -s
 clean:

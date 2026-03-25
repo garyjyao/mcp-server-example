@@ -1,5 +1,5 @@
 APP_NAME:=mcp-server-example
-VERSION:=v1.0.0-rc.1
+VERSION:=1.0.0-rc.1
 HELM_CHART_FILE=./$(APP_NAME)-$(VERSION).tgz
 
 help:
@@ -18,5 +18,5 @@ upgrade: package
 rollback:
 	@helm rollback $(APP_NAME)
 clean:
-	@rm 0f $(HELM_CHART_FILE)
+	@rm -f $(HELM_CHART_FILE)
 all: package

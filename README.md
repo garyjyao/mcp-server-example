@@ -31,6 +31,7 @@ python server.py
 ```
 
 The server starts on `http://localhost:8080` with:
+- Root endpoint at `/` listing available endpoints
 - MCP endpoint at `/mcp` (streamable-http transport)
 - REST API endpoints at `/add`, `/subtract`, `/multiply`, `/divide`, `/power`, `/sqrt`, `/modulo`, `/factorial`
 - API docs at `/docs`

@@ -14,7 +14,14 @@ app = FastAPI(
 @app.get("/")
 async def root():
     """Root endpoint."""
-    return {"app_name": "mcp-server-example", "message": "It works on my machine!"}
+    return {
+        "app_name": "mcp-server-example",
+        "message": "It works on my machine!",
+        "endpoints": {
+            "docs": "/docs",
+            "mcp": "/mcp",
+        },
+    }
 
 
 def _add(a: float, b: float) -> float:

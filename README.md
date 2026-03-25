@@ -120,7 +120,6 @@ make upgrade
 | `run-shell`         | Start a shell in a new container   |
 | `exec-shell`        | Exec into a running container      |
 | `check`             | Run tests with pytest              |
-| `run-smoke-tests`   | Run smoke tests                    |
 | `clean`             | Remove generated files             |
 | `up`                | Build and run (`check` + `image` + `run`) |
 

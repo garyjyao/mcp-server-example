@@ -38,7 +38,20 @@ The server starts on `http://localhost:8080` with:
 
 ### Run Client
 
-The client uses a LangChain agent to interact with the MCP server. Configure the LLM provider via the `LLM_PROVIDER` env var (`ollama`, `openai`, `gemini`). Defaults to `ollama`.
+The client uses a LangChain agent to interact with the MCP server via an interactive REPL. Configure the LLM provider via the `LLM_PROVIDER` env var and the server URL via `MCP_SERVER_URL`.
+
+| Env Var          | Description              | Default                   |
+|------------------|--------------------------|---------------------------|
+| `LLM_PROVIDER`  | LLM provider to use      | `ollama`                  |
+| `MCP_SERVER_URL` | MCP server base URL      | `http://localhost:8080`   |
+
+Supported LLM providers:
+
+| Provider | Model              |
+|----------|--------------------|
+| `ollama` | `llama3.1`         |
+| `openai` | `gpt-4.1`          |
+| `gemini` | `gemini-2.5-flash` |
 
 ```bash
 python client.py

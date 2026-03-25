@@ -3,11 +3,13 @@ from fastapi import FastAPI
 from fastmcp import FastMCP
 
 mcp = FastMCP("Math Server", instructions="A math utility server.")
+mcp_app = mcp.http_app(path="/")
 
 app = FastAPI(
     title="MCP Math Server",
     description="A FastAPI MCP math server",
     version="1.0.0-rc.1",
+    lifespan=mcp_app.lifespan,
 )
 
 
@@ -95,7 +97,7 @@ app.get("/sqrt", tags=["math"])(_sqrt)
 app.get("/modulo", tags=["math"])(_modulo)
 app.get("/factorial", tags=["math"])(_factorial)
 
-app.mount("/mcp", mcp.http_app())
+app.mount("/mcp", mcp_app)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)

@@ -18,7 +18,7 @@ async def lifespan(app):
 
 
 app = FastAPI(
-    title="MCP Math Server",
+    title="MCP Server",
     description="MCP Server",
     version="1.0.0-rc.1",
     lifespan=lifespan,

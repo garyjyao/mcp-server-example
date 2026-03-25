@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is a FastAPI MCP (Model Context Protocol) math server built with FastMCP. It exposes math tools (add, subtract, multiply, divide, power, sqrt, modulo, factorial) over streamable-http transport on port 8080. Includes a LangChain-based client for interacting with the server via an LLM agent.
+This is a FastAPI MCP (Model Context Protocol) server built with FastMCP. It exposes math and performance testing tools over streamable-http transport on port 8080. Includes LangChain-based clients for interacting with the server via an LLM agent.
 
 ## Tech Stack
 
@@ -14,8 +14,11 @@ This is a FastAPI MCP (Model Context Protocol) math server built with FastMCP. I
 
 ## Project Structure
 
-- `server.py` — MCP server entry point with all tool definitions
-- `client.py` — LangChain agent client that connects to the MCP server
+- `server.py` — FastAPI app entry point with REST routes and MCP mount
+- `math_mcp_server.py` — Math MCP server with tool definitions
+- `perf_mcp_server.py` — Perf MCP server with load testing tool
+- `math_mcp_client.py` — LangChain agent client for math MCP
+- `perf_mcp_client.py` — LangChain agent client for perf MCP
 - `llm_factory.py` — LLM provider factory (ollama, openai, gemini)
 - `requirements.txt` — Pinned Python dependencies
 - `Dockerfile` — Container image definition (port 8080)

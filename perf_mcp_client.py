@@ -10,13 +10,13 @@ from mcp.client.streamable_http import streamable_http_client
 
 async def main():
     base_url = os.environ.get("MCP_SERVER_URL", "http://localhost:8080")
-    async with streamable_http_client(f"{base_url}/mcp/") as (read, write, _):
+    async with streamable_http_client(f"{base_url}/perf-mcp/") as (read, write, _):
         async with ClientSession(read, write) as session:
             await session.initialize()
             tools = await load_mcp_tools(session)
             llm = create_llm()
             agent = create_agent(llm, tools)
-            print("MCP Math Client (type 'quit' to exit)")
+            print("MCP Perf Client (type 'quit' to exit)")
             while True:
                 try:
                     query = input("\nQuery: ").strip()

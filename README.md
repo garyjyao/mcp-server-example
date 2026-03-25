@@ -2,9 +2,11 @@
 
 [![Build](https://github.com/jecklgamis/mcp-server-example/actions/workflows/build.yaml/badge.svg)](https://github.com/jecklgamis/mcp-server-example/actions/workflows/build.yaml)
 
-A FastAPI MCP (Model Context Protocol) math server built with [FastMCP](https://github.com/jlowin/fastmcp).
+A FastAPI MCP (Model Context Protocol) server built with [FastMCP](https://github.com/jlowin/fastmcp). Exposes math and performance testing tools over streamable-http transport.
 
-## Tools
+## MCP Tools
+
+### Math (`/math_mcp`)
 
 | Tool        | Description                                    |
 |-------------|------------------------------------------------|
@@ -17,16 +19,25 @@ A FastAPI MCP (Model Context Protocol) math server built with [FastMCP](https://
 | `modulo`    | Calculate a mod b                              |
 | `factorial` | Calculate the factorial of a non-negative integer |
 
+### Perf (`/perf-mcp`)
+
+| Tool             | Description                                         |
+|------------------|-----------------------------------------------------|
+| `run_perf_test`  | Run a load test against a URL with concurrent requests |
+
 ## Project Structure
 
 ```
-server.py          — MCP server with math tool definitions
-client.py          — Interactive LangChain agent client
-llm_factory.py     — LLM provider factory (ollama, openai, gemini)
-requirements.txt   — Python dependencies
-Dockerfile         — Container image definition
-Makefile           — Build and run shortcuts
-deployment/        — Helm chart for Kubernetes deployment
+server.py              — FastAPI app entry point with REST routes and MCP mount
+math_mcp_server.py     — Math MCP server with tool definitions
+perf_mcp_server.py     — Perf MCP server with load testing tool
+math_mcp_client.py     — Interactive LangChain agent client (math)
+perf_mcp_client.py     — Interactive LangChain agent client (perf)
+llm_factory.py         — LLM provider factory (ollama, openai, gemini)
+requirements.txt       — Python dependencies
+Dockerfile             — Container image definition
+Makefile               — Build and run shortcuts
+deployment/            — Helm chart for Kubernetes deployment
 ```
 
 ## Getting Started
@@ -44,8 +55,9 @@ python server.py
 
 The server starts on `http://localhost:8080` with:
 - Root endpoint at `/` listing available endpoints
-- MCP endpoint at `/mcp` (streamable-http transport)
-- REST API endpoints at `/add`, `/subtract`, `/multiply`, `/divide`, `/power`, `/sqrt`, `/modulo`, `/factorial`
+- Math MCP endpoint at `/math_mcp` (streamable-http transport)
+- Perf MCP endpoint at `/perf-mcp` (streamable-http transport)
+- REST API endpoints at `/add`, `/subtract`, `/multiply`, `/divide`, `/power`, `/sqrt`, `/modulo`, `/factorial`, `/run_perf_test`
 - API docs at `/docs`
 
 ### Run Client
@@ -66,11 +78,15 @@ Supported LLM providers:
 | `gemini` | `gemini-2.5-flash` |
 
 ```bash
-python client.py
+python math_mcp_client.py
 ```
 
 ```bash
-LLM_PROVIDER=openai python client.py
+python perf_mcp_client.py
+```
+
+```bash
+LLM_PROVIDER=openai python math_mcp_client.py
 ```
 
 ### Run with Docker

@@ -30,7 +30,10 @@ pip install -r requirements.txt
 python server.py
 ```
 
-The server starts on `http://localhost:8080/sse` using SSE transport.
+The server starts on `http://localhost:8080` with:
+- MCP endpoint at `/mcp` (streamable-http transport)
+- REST API endpoints at `/add`, `/subtract`, `/multiply`, `/divide`, `/power`, `/sqrt`, `/modulo`, `/factorial`
+- API docs at `/docs`
 
 ### Run with Docker
 
@@ -44,4 +47,11 @@ docker run -p 8080:8080 mcp-server-example
 ```bash
 cd deployment/k8s/helm
 helm install mcp-server-example ./mcp-server-example
+```
+
+### Upgrade with Helm
+
+```bash
+cd deployment/k8s/helm
+make upgrade
 ```

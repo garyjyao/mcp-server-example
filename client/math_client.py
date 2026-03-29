@@ -10,11 +10,12 @@ from mcp.client.streamable_http import streamable_http_client
 
 async def main():
     base_url = os.environ.get("MCP_SERVER_URL", "http://localhost:8080")
+    provider = os.environ.get("LLM_PROVIDER")
     async with streamable_http_client(f"{base_url}/math_mcp/") as (read, write, _):
         async with ClientSession(read, write) as session:
             await session.initialize()
             tools = await load_mcp_tools(session)
-            llm = create_llm()
+            llm = create_llm(provider)
             agent = create_agent(llm, tools)
             print("MCP Math Client (type 'quit' to exit)")
             while True:
@@ -27,8 +28,8 @@ async def main():
                 agent_response = await agent.ainvoke({"messages": [("user", query)]})
                 messages = agent_response.get("messages", [])
                 for msg in messages:
-                    if msg.type == "ai" and msg.content and not msg.tool_calls:
-                        print(f"Response: {msg.content}")
+                    # if msg.type == "ai" and msg.content and not msg.tool_calls:
+                    print(f"Response: {msg}")
 
 
 if __name__ == '__main__':

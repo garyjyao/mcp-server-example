@@ -5,6 +5,7 @@ mcp = FastMCP("Math Server", instructions="A math utility server.")
 
 def _add(a: float, b: float) -> float:
     """Add two numbers."""
+    print(f"Adding {a} and {b}")
     return a + b
 
 
